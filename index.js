@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan")
 const cors = require("cors")
 
+const baseUrl = '/api/notes'
 const app = express();
 
 let data = [
@@ -39,6 +40,8 @@ app.use(express.json());
 // app.use(requestLogger)
 morgan.token('body', (req, res) => JSON.stringify(req.body))
 app.use(morgan('tiny :body'))
+
+app.use(express.static('build'))
 
 app.get("/api/persons", (request, response) => {
   response.json(data);
